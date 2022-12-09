@@ -1,4 +1,4 @@
-import { CommandsLoader } from '../deps.ts'
+import { log } from '../deps.ts'
 import {
   Client,
   event,
@@ -7,10 +7,12 @@ import {
   ApplicationCommandOptionType
 } from '../deps.ts'
 
+import { sql } from '../db.ts'
+
 export class AwaitBotClient extends Client {
     @event()
     async ready(): Promise<void> {
-      console.log(`Bot registered (logged-in) as ${this.user?.tag}!`)
+      log.info(`  -> Bot registered (logged-in) as ${this.user?.tag}!`)
       // There *should* be some better way of knowing if we need to refresh commands. 
       const commands = await this.interactions.commands.all()
       if (commands.size !== 4) {
