@@ -1,3 +1,2 @@
 export * from "https://deno.land/x/harmony/mod.ts"
-export * from "https://deno.land/x/gotrue@2.0.0/mod.ts"
-export { createClient } from "https://deno.land/x/supabase@1.3.0/mod.ts";
+export * as log from "https://deno.land/std@0.167.0/log/mod.ts"
