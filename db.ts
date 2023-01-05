@@ -1,4 +1,4 @@
-import postgres from 'https://deno.land/x/postgresjs/mod.js'
+import postgres from "https://deno.land/x/postgresjs@v3.3.2/mod.js"
 
 const sql = postgres(
   'postgresql://postgres:' + 
