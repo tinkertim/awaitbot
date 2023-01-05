@@ -1,7 +1,9 @@
+import "https://deno.land/std@0.171.0/dotenv/load.ts";
 import { GatewayIntents } from './deps.ts'
 import { log } from './deps.ts'
 import { AwaitBotClient } from './src/AwaitBotClient.ts'
 import { sql } from './db.ts'
+
 
 const botToken = Deno.env.get("DISCORD_BOT_TOKEN")
 if (botToken === undefined) {
