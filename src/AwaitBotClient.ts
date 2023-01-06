@@ -7,7 +7,7 @@ import {
   slash,
 } from "../deps.ts";
 
-import _sql from "../db.ts";
+import sql from "../db.ts";
 
 export class AwaitBotClient extends Client {
   @event()
@@ -32,22 +32,22 @@ export class AwaitBotClient extends Client {
           ],
         },
         {
-          name: "remind",
-          description: "Remind (print) what you said you were going to build.",
+          name: "report",
+          description: "Print the promises we're currently tracking (all)",
         },
         {
           name: "forget",
-          description: "Cancel your outstanding promise, if any.",
+          description: "Cancel your outstanding promise.",
         },
         {
           name: "return",
           description:
-            "Let awaitbot know that you completed something you promised to build.",
+            "Let awaitbot know that you completed a promise!",
           options: [
             {
               name: "link",
               description:
-                "Link to verify some kind of implementation has been achieved.",
+                "Link to URL or image to verify something has been achieved.",
               required: true,
               type: ApplicationCommandOptionType.STRING,
             },
@@ -59,34 +59,48 @@ export class AwaitBotClient extends Client {
 
   @slash()
   await(d: ApplicationCommandInteraction): void {
-    const arg = d.option<string | undefined>("project");
-    d.reply(
-      `Your project begins now. Go forth and "${
-        arg !== undefined ? arg : "nothing"
-      }"; we're here if you need help!`,
-    );
-    console.log("promise posted");
+    const arg = d.option<string>("project");
+
+    // Control is, we assume sanity is good unless a specific check says it isn't.
+    // (checks will implement this)
+    const valid = true;
+
+    // First, check if active project, ask to finish that one first (or /forget it)
+    // TODO
+
+    if (valid == true) {
+      // at this point it's okay to just register the project, so do it.
+      d.reply(
+        `Your project begins now. Go forth and "${arg}"; we're here if you need help!`,
+      );
+      log.info(`new promise posted by ${d.user.username}: ${arg}`);
+    }
   }
 
   @slash()
   remind(d: ApplicationCommandInteraction): void {
+    // query for active project, if any, and report
     d.reply(
       `You said you were going to do something ... can't quite put my finger on it ...`,
     );
-    console.log("reminder requested");
+    log.info(`reminder requested by ${d.user.username}`);
   }
 
   @slash()
   forget(d: ApplicationCommandInteraction): void {
+    // Make sure there's something to forget
+
+    // Fine, forget it already
     d.reply(`Your project has been recycled. Type /await to begin a new one!`);
-    console.log("promise cancelled");
+    log.info(`promise cancelled by ${d.user.username}`);
   }
 
   @slash()
   return(d: ApplicationCommandInteraction): void {
+    const arg = d.option<string>("link");
     d.reply(
       `Your submission has been recorded, and our community team has been notified. They will reach out to you soon!`,
     );
-    console.log("promise handed in");
+    log.info(`promise handed in by ${d.user.username}: ${arg}`);
   }
 }
