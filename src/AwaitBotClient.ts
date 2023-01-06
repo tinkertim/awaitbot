@@ -1,9 +1,9 @@
 import {
-  log,
   ApplicationCommandInteraction,
   ApplicationCommandOptionType,
   Client,
   event,
+  log,
   slash,
 } from "../deps.ts";
 
@@ -41,8 +41,7 @@ export class AwaitBotClient extends Client {
         },
         {
           name: "return",
-          description:
-            "Let awaitbot know that you completed a promise!",
+          description: "Let awaitbot know that you completed a promise!",
           options: [
             {
               name: "link",
