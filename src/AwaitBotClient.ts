@@ -1,5 +1,5 @@
-import { log } from "../deps.ts";
 import {
+  log,
   ApplicationCommandInteraction,
   ApplicationCommandOptionType,
   Client,
