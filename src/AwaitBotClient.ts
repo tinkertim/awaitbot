@@ -7,8 +7,6 @@ import {
   slash,
 } from "../deps.ts";
 
-import sql from "../db.ts";
-
 export class AwaitBotClient extends Client {
   @event()
   async ready(): Promise<void> {
